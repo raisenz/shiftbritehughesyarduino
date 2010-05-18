@@ -12,6 +12,7 @@ class ShiftBriteHughesy
 {
 public:
 	ShiftBriteHughesy();
+	ShiftBriteHughesy(int dataPin, int latchPin, int enablePin, int clockPin);
 	void sendColour(int r, int g, int b);
 private:
 	int _SB_CommandMode;
