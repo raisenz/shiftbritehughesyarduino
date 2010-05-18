@@ -29,12 +29,33 @@ ShiftBriteHughesy::ShiftBriteHughesy(int dataPin, int latchPin, int enablePin, i
 
 void ShiftBriteHughesy::sendColour(int r, int g, int b)
 {
-	
-    _SB_CommandMode = B00;
-    _SB_RedCommand = r;
-    _SB_GreenCommand = g;
-    _SB_BlueCommand = b;
-    _SB_SendPacket();
+	if (r <= 1023 && g <= 1023 && b <= 1023) 
+	{
+		_SB_CommandMode = B00;
+		_SB_RedCommand = r;
+		_SB_GreenCommand = g;
+		_SB_BlueCommand = b;
+		_SB_SendPacket();
+	}
+	else
+	{
+		//FLASH RED 7 times for error
+		_SB_CommandMode = B00;
+		_SB_RedCommand = 0;
+		_SB_GreenCommand = 0;
+		_SB_BlueCommand = 0;
+		_SB_SendPacket();
+		
+		for(int i = 0; i < 7; i++)
+		{
+			delay(100);
+			_SB_RedCommand = 1023;
+			_SB_SendPacket();
+			delay(100);
+			_SB_RedCommand = 0;
+			_SB_SendPacket();
+		}
+	}
 }
 
 void ShiftBriteHughesy::_SB_SendPacket() 
