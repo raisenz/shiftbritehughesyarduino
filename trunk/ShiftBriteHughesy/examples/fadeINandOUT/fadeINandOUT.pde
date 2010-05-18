@@ -6,6 +6,7 @@ const int DELAY_VAL = 25;
 
 void setup()
 {
+	sb = ShiftBriteHughesy();
   Serial.begin(9600);
 }
 
