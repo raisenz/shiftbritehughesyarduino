@@ -8,18 +8,33 @@
 
 ShiftBriteHughesy::ShiftBriteHughesy()
 {
-	_dPin = 10;
-	_lPin = 11;
-	_ePin = 12;
-	_cPin = 13;
+	ShiftBriteHughesy(10, 11, 12, 13);
+}
+
+ShiftBriteHughesy::ShiftBriteHughesy(int dataPin, int latchPin, int enablePin, int clockPin)
+{
+	_dPin = dataPin;
+	_lPin = latchPin;
+	_ePin = enablePin;
+	_cPin = clockPin;
 	
 	pinMode(_dPin, OUTPUT);
 	pinMode(_lPin, OUTPUT);
 	pinMode(_ePin, OUTPUT);
 	pinMode(_cPin, OUTPUT);
-
+	
 	digitalWrite(_lPin, LOW);
 	digitalWrite(_ePin, LOW);
+}
+
+void ShiftBriteHughesy::sendColour(int r, int g, int b)
+{
+	
+    _SB_CommandMode = B00;
+    _SB_RedCommand = r;
+    _SB_GreenCommand = g;
+    _SB_BlueCommand = b;
+    _SB_SendPacket();
 }
 
 void ShiftBriteHughesy::_SB_SendPacket() 
@@ -38,14 +53,4 @@ void ShiftBriteHughesy::_SB_SendPacket()
   digitalWrite(_lPin,HIGH); // latch data into registers
   delay(1); // adjustment may be necessary depending on chain length
   digitalWrite(_lPin,LOW);
-}
-
-void ShiftBriteHughesy::sendColour(int r, int g, int b)
-{
-
-    _SB_CommandMode = B00;
-    _SB_RedCommand = r;
-    _SB_GreenCommand = g;
-    _SB_BlueCommand = b;
-    _SB_SendPacket();
 }
