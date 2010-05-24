@@ -1,7 +1,7 @@
 //working as on 24/APR/10
 
 #include <Bounce.h>
-#include <SimpleRemote.h>
+//#include <//simpleRemotge.h>
 
 const byte BUTTON_PLAY = 6;
 const byte BUTTON_NEXT = 5;
@@ -22,104 +22,120 @@ Bounce btnScrollUp(BUTTON_SCROLL_UP, DEBOUNCE_MS);
 Bounce btnScrollDown(BUTTON_SCROLL_DOWN, DEBOUNCE_MS);
 Bounce btnSelect(BUTTON_SELECT, DEBOUNCE_MS);
 
-SimpleRemote simpleRemote;
+//simpleRemotge //simpleRemotge;
 
 void setup()
 {
+  Serial.begin(9600);
   //init buttons
   for(int i = BUTTON_PLAY; i < BUTTON_SELECT+1; i++)
   {
     pinMode(i,INPUT);
     digitalWrite(i, HIGH);
   }
-  simpleRemote.setup();
+  //simpleRemotge.setup();
 }
 
 void loop()
 {
-  simpleRemote.loop();
+  //simpleRemotge.loop();
 
   if(btnPlay.update())
   {
     if (btnPlay.read() == LOW)
     {
-      simpleRemote.sendPlay();
+      Serial.println("play");
+      //simpleRemotge.sendPlay();
 
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("play released");
+      //simpleRemotge.sendButtonReleased();
     }
   }
   if(btnNext.update())
   {
     if (btnNext.read() == LOW)
     {
-      simpleRemote.sendSkipForward();
+      Serial.println("forward");
+      //simpleRemotge.sendSkipForward();
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("forward release");
+      //simpleRemotge.sendButtonReleased();
     }
   }
   if(btnPrevious.update())
   {
     if (btnPrevious.read() == LOW)
     {
-      simpleRemote.sendSkipBackward();
+      Serial.println("backward");
+      //simpleRemotge.sendSkipBackward();
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("backward release");
+      //simpleRemotge.sendButtonReleased();
     }
   }
-if(btnMenu.update())
+  if(btnMenu.update())
   {
     if (btnMenu.read() == LOW)
     {
-      simpleRemote.sendMenuButton();
+      Serial.println("menu");
+      //simpleRemotge.sendMenuButton();
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("menu release");
+      //simpleRemotge.sendButtonReleased();
     }
   }
-if(btnScrollUp.update())
+  if(btnScrollUp.update())
   {
     if (btnScrollUp.read() == LOW)
     {
-      simpleRemote.sendScrollUp();
+      Serial.println("up");
+      //simpleRemotge.sendScrollUp();
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("up release");
+      //simpleRemotge.sendButtonReleased();
     }
   }
-if(btnScrollDown.update())
+  if(btnScrollDown.update())
   {
     if (btnScrollDown.read() == LOW)
     {
-      simpleRemote.sendScrollDown();
+      Serial.println("down");
+      //simpleRemotge.sendScrollDown();
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("down release");
+      //simpleRemotge.sendButtonReleased();
     }
   }
-if(btnSelect.update())
+  if(btnSelect.update())
   {
     if (btnSelect.read() == LOW)
     {
-      simpleRemote.sendOkSelectButton();
+      Serial.println("select");
+      //simpleRemotge.sendOkSelectButton();
     }
     else
     {
-      simpleRemote.sendButtonReleased();
+      Serial.println("select release");
+      //simpleRemotge.sendButtonReleased();
     }
   }
 
 
 }
+
 
 
 
